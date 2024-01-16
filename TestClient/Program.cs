@@ -70,38 +70,12 @@ namespace TestClient
                     sId = Console.ReadLine();
                 }
 
-
-                //NOTE: For Device Authority testing
-                //Console.Write("Enter cpId: ");
-                //string cpId = Console.ReadLine();
-
-                //uniqueId = "JKtype12point1";// Console.ReadLine();
-                //string sId = "ZjNmNGIxMmQ4MmUxNDllNzliYjM4NGYxNWQ0OGExZTU=UDI6MDE6OTIuMzA=";// Console.ReadLine();
-
-                //uniqueId = "latlongtest";
-                //sId = "MDNkMzhkMjUwNDI1NGEwNzhjYjA0YTBkMGY1MjllYWQ=UTE6MDE6NzAuOTM=";
-
-                //uniqueId = "AAug2022";// "testLatLong";
-                //sId = "ZWJlYmYwZmVjMjUwNGM2NmJiYmEzZGMwMGRkMzQzOTg=UDI6MDE6OTIuMzA=";
-
-                //string environment = "preqa";
-
-
-                //uniqueId = "DevTest11";
-                //sId = "YTIwZDVjODhjZTA5NDhhZDgxYzMxNWUwMjAzZDFlZDA=UTI6MDE6MDIuMDA=";
-                //environment = "qa";
-
-                //if (args.Length > 0)
-                //    environment = args[0];
-
                 if ((string.IsNullOrWhiteSpace(sId) && string.IsNullOrWhiteSpace(cpId)) || string.IsNullOrEmpty(sId) &&
                     (string.IsNullOrEmpty(cpId) || string.IsNullOrEmpty(environment)) || string.IsNullOrWhiteSpace(uniqueId))
                 {
                     Console.WriteLine("Invalid Inputs!");
                     return;
                 }
-
-
 
                 string discoveryUrl = "";
                 Console.Write($"{Environment.NewLine}Wants to change discovery url? (Y|N) [Default N]: ");
@@ -578,31 +552,7 @@ namespace TestClient
             await CancelWhileLoopTask();
             Console.WriteLine("FIRMWARE ::: Module command received : " + arg);
 
-            //var command = JsonConvert.DeserializeObject<ModuleCommand>(arg);
-            //if (command.Ack.HasValue && command.Ack.Value != Guid.Empty)
-            //{
-            //    Console.WriteLine("Enter module ack status: ");
-            //    var status = Console.ReadLine();
-
-            //    Console.WriteLine("Enter module ack message: ");
-            //    var msg = Console.ReadLine();
-
-            //    if (DeviceList.Count > 1)
-            //    {
-            //        foreach (var item in DeviceList)
-            //        {
-            //            Console.WriteLine($"Want to send ack for this child device (Y/N) : {item.Id}");
-            //            var confirmation = Console.ReadLine();
-            //            if (!confirmation.Equals("n", StringComparison.CurrentCultureIgnoreCase))
-            //              client.SendAckModule(command.Ack.Value, Convert.ToInt32(status), msg, item.Id);
-            //        }
-            //    }
-            //    else
-            //        client.SendAckModule(command.Ack.Value, Convert.ToInt32(status), msg);
-            //}
-            //else
             Console.WriteLine("FIRMWARE ::: No acknowledgement required.");
-
             isCallbackCompleted = true;
         }
 

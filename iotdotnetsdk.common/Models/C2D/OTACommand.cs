@@ -1,8 +1,5 @@
 ﻿using Newtonsoft.Json;
 
-using System;
-using System.Collections.Generic;
-
 namespace iotdotnetsdk.common.Models.C2D
 {
     public class OTACommand : BaseCommand
