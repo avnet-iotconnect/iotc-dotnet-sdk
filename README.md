@@ -163,37 +163,49 @@ String deviceData = "[{
 sdkClient.SendData(deviceData);
 ```
 
-**Note:** Date time will be in ISO 8601 format as "YYYY-MM-DDTHH:MM:SS.sssZ". Example: "2019-12-24T10:06:17.857Z"
-"time" : Date format should be as defined //"2021-01-24T10:06:17.857Z"
-"data" : JSON data type format // {"temperature": 15.55, "gyroscope" : { 'x' : -1.2 }}
+**Note::** Date time will be in ISO 8601 format as "YYYY-MM-DDTHH:MM:SS.sssZ". Example: "2019-12-24T10:06:17.857Z"  
+"time" : Date format should be as defined //"2021-01-24T10:06:17.857Z"  
+"data" : JSON data type format // {"temperature": 15.55, "gyroscope" : { 'x' : -1.2 }}  
 
-To send the command acknowledgment
+To send an acknowledgment for device command   
 ```c#
-var command = JsonConvert.DeserializeObject<DeviceCommand>(arg);
-client.SendAckCmd(command.Ack.Value, 6, "Ack done.!!!");
+var command = JsonConvert.DeserializeObject<DeviceCommand>(arg);  
+client.SendAckCmd(command.Ack.Value, 6, "Ack done.!!!"); //This method allows device to send an acknowledgement for normal device.  
+client.SendAckCmd(command.Ack.Value, 6, "Ack done for child device.!!!", "ChildId"); //Overloaded method to send an acknowledgement for child device only.  
 ```
-"ackId(*)" 	: Command Acknowledgment GUID which will receive from command payload (data.ackId)
-"st(*)"		: Acknowledgment status sent to cloud (4 = Fail, 6 = Device command[0x01], 7 = Firmware OTA command[0x02])
-"msg" 		: It is used to send your custom message
-"childId" 	: It is used for Gateway's child device OTA update only
-				0x01 : null or "" for Device command
-			  	0x02 : null or "" for Gateway device and mandatory for Gateway child device's OTA update.
-		   		How to get the "childId" .?
-		   		- You will get child uniqueId for child device OTA command from payload "data.urls[~].uniqueId"
-"msgType" 	: Message type (5 = "0x01" device command, 11 = "0x02" Firmware OTA command)
-Note : (*) indicates the mandatory element of the object.
+#"ackGuid"  : Command Acknowledgment GUID which will receive from command payload. (data.ack)  
+#"status"   : Acknowledgment status sent to cloud, must be 4 or 6. [4 = Failed, 6 = Executed Ack]  
+#"msg"      : It is used to set custom acknowledgement message.  
+"childId"   : It should be a child uniqueId for an acknowledgement to be sent for.  
+		   	  How to get the "childId" .?  
+		   		- You will get child uniqueId for child device from payload "data.id"  
+**Note::**  : # indicates the mandatory element of the object.  
 
-To disconnect the device from the cloud
+To send an acknowledgment for OTA Update command  
+```c#
+var command = JsonConvert.DeserializeObject<OTACommand>(arg);  
+client.SendOTAAckCmd(command.Ack.Value, 7, "OTA Updated.!!!"); //This method allows device to send an acknowledgement for normal/gateway device.  
+client.SendOTAAckCmd(command.Ack.Value, 7, "OTA Updated for child device.!!!", "ChildId"); //Overloaded method to send an acknowledgement for child device only.  
+```
+#"ackId"    : Command Acknowledgment GUID which will receive from command payload (data.ack)  
+#"st        : Acknowledgment status sent to cloud, must be 4 or 7. [4 = Failed, 7 = Success]  
+#"msg"      : It is used to set custom acknowledgement message  
+"childId"   : It is used to send an acknowledgement for Gateway's child device  
+		   	  How to get the "childId" .?  
+		   		- You need to get child uniqueId based on tag from the response of 204 message and ota update message, Once OTA update completed for the specific child device in firmware.    
+**Note::**  : # indicates the mandatory element of the object.  
+
+To disconnect device and dispose the object of device from the cloud  
 ```c#
 sdkClient.Dispose();
 ```
 
-To get the Desired and Reported shadow/twin property 
+To get the Desired and Reported shadow/twin property  
 ```c#
 sdkClient.GetShadows();
 ```
 
-To get all the attributes 
+To get all the attributes  
 ```c#
 sdkClient.GetAttributes();
 ```

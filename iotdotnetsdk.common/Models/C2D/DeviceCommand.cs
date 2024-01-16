@@ -1,7 +1,5 @@
 ﻿using Newtonsoft.Json;
 
-using System;
-
 namespace iotdotnetsdk.common.Models.C2D
 {
     public class DeviceCommand : BaseCommand
