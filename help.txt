@@ -21,7 +21,7 @@ This is an DOTNET CORE SDK library to connect the device with IoTConnect cloud b
 
 Follow the steps given below to import our SDK as a library
 - Open Visual Studio 2017/2019, Create new .net core Console App.
-- Extract (get "nupkg" file from ìiotconnect-sdk-dotnet-core-v1.14.0.zipî) the zip file and Create new folder called Nuget and place IOTConnect SDK Nuget package.
+- Extract (get "nupkg" file from ‚Äúiotconnect-sdk-dotnet-core-v1.14.0.zip‚Äù) the zip file and Create new folder called Nuget and place IOTConnect SDK Nuget package.
 - Open Nuget Package Manager of Console App and click on Settings for Package source.
 - Add new Package source, name it as LocalPackage and in source give path of Nuget folder created in step #2
 - Install package from server/local nuget manager.
@@ -203,7 +203,7 @@ sdkClient.GetAttributes();
 
 * Follow the steps given below to import our SDK as a library
 	- Open Visual Studio 2022, Create new .net core Console App.
-	- Extract (get "nupkg" file from ìiotconnect-sdk-dotnet-core-v1.14.0.zipî) the zip file and Create new folder called Nuget and place IOTConnect SDK Nuget package.
+	- Extract (get "nupkg" file from ‚Äúiotconnect-sdk-dotnet-core-v1.14.0.zip‚Äù) the zip file and Create new folder called Nuget and place IOTConnect SDK Nuget package.
 	- Open Nuget Package Manager of Console App and click on Settings for Package source.
 	- Add new Package source, name it as LocalPackage and in source give path of Nuget folder created in step #2
 	- Install package from server/local nuget manager.
